@@ -10,8 +10,22 @@ const bcrypt = require('bcrypt')
 const jwt =require('jsonwebtoken')
 //Create a new user
 
-router.post('/registration', async(req,res)=>{
+router.post('/registration',[
+    check('username', 'Enter a valid alphanumeric username').trim().notEmpty().isAlphanumeric(),
+    check('email','Please enter a valid email format').trim().notEmpty().isEmail(),
+    check('password', 'Please enter a password with 8 or more characters').trim().isLength({min:6}),
+    check('age','Age needs to be numeric and greater than 13').trim().isInt({min :13}),
+    check('birthday', 'Enter valid Birthday').isDate()//.isBefore('Date.now()')
+], async(req,res)=>{
     const userData =req.body // getting the data from the request
+   
+   //Check for Validation Errors
+   const errors=validationResult(req)
+   
+   if(!errors.isEmpty()){
+       return res.json(errors.array())
+   }
+   
     try {
       
         //Validate if the email already exist in DB
@@ -49,8 +63,8 @@ router.post('/registration', async(req,res)=>{
 })
 
 router.post('/login',[
-    check("email","pleases provide a valid email").isEmail(),
-    check("password","Check your password").notEmpty()
+    check("email","pleases provide a valid email").trim().isEmail(),
+    check("password","Check your password").trim().notEmpty()
 ],async(req,res)=>{
     const userData = req.body
 
@@ -75,6 +89,7 @@ router.post('/login',[
 
 //Create a new JWT token
 const payload= {
+    
     id: user._id,
     email: user.email
   }
@@ -82,6 +97,7 @@ const payload= {
   const TOKEN = jwt.sign(payload, process.env.SECRET_KEY)
   
       res.status(201).json({
+        msg: 'Login Sucessful',
         user :user,
         token:TOKEN
       })
