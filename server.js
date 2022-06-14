@@ -26,6 +26,8 @@ const blogsRouter = require('./routes/blogRouter')
 app.use('/blogs', blogsRouter)
 const authRouter = require('./routes/authRouter')
 app.use('/auth', authRouter)
+const userRouter = require('./routes/userRouter')
+app.use('/users', userRouter)
 
 //Setup the Root Route
 app.get('/',(req,res)=>{

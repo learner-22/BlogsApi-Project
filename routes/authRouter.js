@@ -15,7 +15,7 @@ router.post('/registration',[
     check('email','Please enter a valid email format').trim().notEmpty().isEmail(),
     check('password', 'Please enter a password with 8 or more characters').trim().isLength({min:6}),
     check('age','Age needs to be numeric and greater than 13').trim().isInt({min :13}),
-    check('birthday', 'Enter valid Birthday').isDate()//.isBefore('Date.now()')
+    check('birthday', 'Enter valid Birthday').isDate()//.isBefore('Date()')
 ], async(req,res)=>{
     const userData =req.body // getting the data from the request
    

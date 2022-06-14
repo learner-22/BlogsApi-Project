@@ -21,6 +21,18 @@ router.get('/',authMiddleware, async(req,res) =>{
 
 })
 
+// Get only blogs that are not private - private is false
+router.get('/public',authMiddleware, async(req,res) =>{
+ 
+    try {
+  const blogs = await blogModel.find({private: 'false'})
+  res.status(200).json(blogs)
+    
+} catch (error) {
+    console.log(error)
+}
+
+})
 // Create Blogs
 router.post('/',authMiddleware,async(req,res)=>{
     const blogData =req.body // getting the data from the request
