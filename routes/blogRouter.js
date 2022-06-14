@@ -5,8 +5,11 @@ const blogModel = require('../models/blogSchema')
 //Create a Router
 const router = express.Router()
 
+//Get the middleware for token authorisation
+const authMiddleware =require('../middleware/authMiddleware')
+
 // Get Blogs
-router.get('/', async(req,res) =>{
+router.get('/',authMiddleware, async(req,res) =>{
  
     try {
   const blogs = await blogModel.find()
@@ -19,7 +22,7 @@ router.get('/', async(req,res) =>{
 })
 
 // Create Blogs
-router.post('/',async(req,res)=>{
+router.post('/',authMiddleware,async(req,res)=>{
     const blogData =req.body // getting the data from the request
     try {
         
@@ -34,7 +37,7 @@ router.post('/',async(req,res)=>{
 })
 
 // Get blogs by Id
-router.get('/:id',async(req,res)=>{
+router.get('/:id',authMiddleware,async(req,res)=>{
     const id = req.params.id
     try {
         const blog = await blogModel.findById(id)
@@ -48,7 +51,7 @@ router.get('/:id',async(req,res)=>{
 
 // Update blogs by ID
 
-router.put('/:id',async(req,res)=>{
+router.put('/:id',authMiddleware,async(req,res)=>{
     const id = req.params.id
     const newblogData = req.body
     try {
@@ -62,7 +65,7 @@ router.put('/:id',async(req,res)=>{
 })
 
 // Delete a Todo
-router.delete('/:id', async(req,res) => {
+router.delete('/:id',authMiddleware, async(req,res) => {
 
     const id = req.params.id
     try {

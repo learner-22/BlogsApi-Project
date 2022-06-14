@@ -7,7 +7,7 @@ const router = express.Router()
 
 const {check, validationResult} = require( 'express-validator')
 const bcrypt = require('bcrypt')
-
+const jwt =require('jsonwebtoken')
 //Create a new user
 
 router.post('/registration', async(req,res)=>{
@@ -29,8 +29,19 @@ router.post('/registration', async(req,res)=>{
    userData.password = hashedPassword
  
         const user = await userModel.create(userData) 
+
+        //Create a new JWT token
+        const payload= {
+              id: user._id,
+              email: user.email
+             }
+  
+         const TOKEN = jwt.sign(payload, process.env.SECRET_KEY)
        //send back the response
-        res.status(201).json(user)
+       res.status(201).json({
+        user :user,
+        token:TOKEN
+      })
     } catch (error) {
         console.error(error)
         res.status(400).json('Bad Request!')
@@ -62,20 +73,20 @@ router.post('/login',[
             return res.json('Password is not a match')
         }
 
-// //Create a new JWT token
-// const payload= {
-//     id: user._id,
-//     email: user.email
-//   }
+//Create a new JWT token
+const payload= {
+    id: user._id,
+    email: user.email
+  }
   
-//   const TOKEN = jwt.sign(payload, process.env.SECRET_KEY)
+  const TOKEN = jwt.sign(payload, process.env.SECRET_KEY)
   
-//       res.status(201).json({
-//         user :user,
-//         token:TOKEN
-//       })
+      res.status(201).json({
+        user :user,
+        token:TOKEN
+      })
 
-       res.status(200).json('Login Success!')
+      // res.status(200).json('Login Success!')
     } catch (error) {
         console.log(error)
         res.status(500).json('Server Error')
