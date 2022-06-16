@@ -3,6 +3,7 @@
 const mongoose = require('mongoose')
 
 //Create the blogs Schema
+//Added user key to store the user id of the user who created the blog
 const blogSchema = mongoose.Schema(
     {
         created_by : {
@@ -26,6 +27,11 @@ const blogSchema = mongoose.Schema(
             type: Boolean,
             required : true
         },
+        user:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref :'Users'
+                      
+        }
     }
 )
 

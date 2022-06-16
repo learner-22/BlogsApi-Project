@@ -13,12 +13,12 @@ const jwt =require('jsonwebtoken')
 router.post('/registration',[
     check('username', 'Enter a valid alphanumeric username').trim().notEmpty().isAlphanumeric(),
     check('email','Please enter a valid email format').trim().notEmpty().isEmail(),
-    check('password', 'Please enter a password with 8 or more characters').trim().isLength({min:6}),
+    check('password', 'Please enter a password with 8 or more characters').trim().isLength({min:8}),
     check('age','Age needs to be numeric and greater than 13').trim().isInt({min :13}),
-    check('birthday', 'Enter valid Birthday').isDate()//.isBefore('Date()')
+    check('birthday', 'Enter valid Birthday').isDate()
 ], async(req,res)=>{
     const userData =req.body // getting the data from the request
-   
+
    //Check for Validation Errors
    const errors=validationResult(req)
    
