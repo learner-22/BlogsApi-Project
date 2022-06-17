@@ -2,7 +2,9 @@
 //Setup Express and PORT
 const express= require('express')
 const app= express()
-PORT = 4000
+// Heroku sets up the port else when we run locally, we use 4000
+//The PORT variable is kept empty
+PORT = process.env.PORT || 4000
 
 //Initiate the dotenv config 
 require('dotenv').config() 
