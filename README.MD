@@ -50,7 +50,8 @@ https://nbh-blog-api.herokuapp.com
 * We have used Postman to test the routes and the application is hosted on Heroku.
 * User password is hashed using bcrypt
 * User authentication is performed using jsonwebtoken
-* Also, the following packages have been installed
+
+### Also, the following packages have been installed
 
 
 * nodemon
