@@ -4,12 +4,12 @@ https://nbh-blog-api.herokuapp.com
 
 ## Key Features
 
-1. This App has the functionality of User Management and Blog Creation.
-2. The User is expected to Register with the system and subsequently login to the system before creating/editing Blogs. 
+1. Te Blog App has the functionality of Blog Creation and User Management.
+2. The User is expected to Register with the system and subsequently login to the system for creating/editing Blogs. 
 3. A valid login or registration is mandatory to access the Blogs.
 4. Any authenticated user can Create blogs, While only the owner of Blog can Modify or Delete it.
 5. The Blogs can be Created, Read , Updated or Deleted.
-6. Users can Registered , Viewed, Updated ,Deleted.
+6. Users can be Registered , Viewed, Updated ,Deleted.
 7. A Registered user can login to the system at any point of time.
  
 
@@ -40,15 +40,16 @@ https://nbh-blog-api.herokuapp.com
 
 ## Environment Variables
 
-MONGO_DB_URI
-MY_SECRET_KEY 
+* MONGO_DB_URI
+* MY_SECRET_KEY 
 
 
 ## Technology
 
 * This Project has been developed using NodeJS, Express and data is stored in MongoDB.
 * We have used Postman to test the routes and the application is hosted on Heroku.
-
+* User password is hashed using bcrypt
+* User authentication is performed using jsonwebtoken
 * Also, the following packages have been installed
 
 
