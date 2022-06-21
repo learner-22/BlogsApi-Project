@@ -4,7 +4,7 @@ https://nbh-blog-api.herokuapp.com
 
 ## Key Features
 
-1. Te Blog App has the functionality of Blog Creation and User Management.
+1. The Blog App has the functionality of Blogging and User Management.
 2. The User is expected to Register with the system and subsequently login to the system for creating/editing Blogs. 
 3. A valid login or registration is mandatory to access the Blogs.
 4. Any authenticated user can Create blogs, While only the owner of Blog can Modify or Delete it.
